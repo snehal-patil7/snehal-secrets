@@ -1,0 +1,12 @@
+resource "aws_s3_bucket_object" "playbook_object" {
+  bucket = "my-bucket"
+  key    = "playbook.yml"
+  source = "playbook.yml"
+
+  # Ignore changes to object tags
+  lifecycle {
+    ignore_changes = [
+      "tags"
+    ]
+  }
+}
