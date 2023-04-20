@@ -1,0 +1,19 @@
+# Remove module tags for this object
+  dynamic "metadata" {
+    for_each = var.remove_module_tags ? [
+      {
+        name = "Module"
+        value = ".*"
+      },
+      {
+        name = "terraform"
+        value = ".*"
+      }
+    ] : []
+    content {
+      directive = "REMOVE"
+      name      = metadata.value["name"]
+      value     = metadata.value["value"]
+    }
+  }
+}
